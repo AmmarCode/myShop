@@ -10,18 +10,18 @@ const Product = ({ product }) => {
         <Card.Img src={product.image} />
       </Link>
 
-      <Card.Body style={{ backgroundColor: "white", color: "black" }}>
+      <Card.Body>
         <Link
           to={`/product/${product._id}`}
           style={{ textDecorationLine: "none" }}
         >
-          <Card.Title style={{ color: "#375a7f" }}>
+          <Card.Title style={{ color: "white" }}>
             <strong>{product.name}</strong>
           </Card.Title>
         </Link>
 
         <Card.Text as="div">
-          <div className="my-3" style={{ color:"#375a7f" }}>
+          <div className="my-3">
             <Rating
               value={product.rating}
               text={`${product.numReviews} reviews`}
@@ -30,7 +30,7 @@ const Product = ({ product }) => {
           </div>
         </Card.Text>
 
-        <Card.Text as="h3" style={{ color:"#375a7f" }}>${product.price}</Card.Text>
+        <Card.Text as="h3">${product.price}</Card.Text>
       </Card.Body>
     </Card>
   );
