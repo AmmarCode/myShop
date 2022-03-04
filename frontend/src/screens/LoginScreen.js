@@ -11,28 +11,28 @@ const LoginScreen = ({ location, history }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  const userLogin = useSelector(state => state.userLogin)
-  const {error, loading, userInfo} = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { error, loading, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect)
+      history.push(redirect);
     }
-  }, [history, userInfo, redirect])
+  }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(username, password))
+    dispatch(login(username, password));
   };
 
   return (
     <FormContainer>
       <h1>SIGN IN</h1>
-      {error && <Message variant='danger'>{error}</Message>}
+      {error && <Message variant="danger">{error}</Message>}
       {loading && <Loading />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="userename">
@@ -64,7 +64,10 @@ const LoginScreen = ({ location, history }) => {
       <Row className="py-3">
         <Col>
           New Customer?{" "}
-          <Link style={{color: "white"}} to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+          <Link
+            style={{ color: "white" }}
+            to={redirect ? `/register?redirect=${redirect}` : "/register"}
+          >
             Register
           </Link>
         </Col>
