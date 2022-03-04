@@ -11,10 +11,10 @@ const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-	const submitHandler = (e) => {
-		e.preventDefault()
-		console.log('Submitted')
-	}
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("Submitted");
+  };
 
   return (
     <FormContainer>
@@ -26,23 +26,23 @@ const LoginScreen = () => {
             type="text"
             placeholder="Enter username"
             value={username}
-						onChange={(e) => setUsername(e.target.value)}
-          >
-					</Form.Control>
+            onChange={(e) => setUsername(e.target.value)}
+          ></Form.Control>
         </Form.Group>
 
-				<Form.Group controlId="password">
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Enter password"
             value={password}
-						onChange={(e) => setPassword(e.target.value)}
-          >
-					</Form.Control>
+            onChange={(e) => setPassword(e.target.value)}
+          ></Form.Control>
         </Form.Group>
 
-				<Button type="submit" variant="primary">Sign In</Button>
+        <Button type="submit" variant="primary">
+          Sign In
+        </Button>
       </Form>
     </FormContainer>
   );
