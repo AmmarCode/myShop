@@ -7,18 +7,33 @@ import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import { login } from "../actions/userActions";
 
-const LoginScreen = () => {
+const LoginScreen = ({ location, history }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch()
+
+  const redirect = location.search ? location.search.split('=')[1] : '/'
+
+  const userLogin = useSelector(state => state.userLogin)
+  const {error, loading, userInfo} = userLogin
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect)
+    }
+  }, [history, userInfo, redirect])
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submitted");
+    dispatch(login(username, password))
   };
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>SIGN IN</h1>
+      {error && <Message variant='danger'>{error}</Message>}
+      {loading && <Loading />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="userename">
           <Form.Label>Username</Form.Label>
@@ -40,10 +55,20 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <br />
+        <Button type="submit" variant="primary" className="btn btn-primary">
           Sign In
         </Button>
       </Form>
+
+      <Row className="py-3">
+        <Col>
+          New Customer?{" "}
+          <Link style={{color: "white"}} to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+            Register
+          </Link>
+        </Col>
+      </Row>
     </FormContainer>
   );
 };
