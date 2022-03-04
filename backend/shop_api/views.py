@@ -33,7 +33,7 @@ def registerUser(request):
     try:
         user = User.objects.create(
             first_name=data['name'],
-            username=data['email'],
+            username=data['username'],
             email=data['email'],
             password=make_password(data['password'])
         )
@@ -41,8 +41,31 @@ def registerUser(request):
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
-        message = {'detail' : 'User with this email already exists'}
+        message = {'detail': 'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def updateUserProfile(request):
+    user = request.user
+    serializer = UserSerializerWithToken(user, many=False)
+
+    data = request.data
+
+    if data['name'] != '':
+        user.first_name = data['name']
+    if data['email'] != '':
+        user.email = data['email']
+    if data['username'] != '':
+        user.username = data['username']
+    if data['password'] != '':
+        user.password = make_password(data['password'])
+
+    user.save()
+
+    return Response(serializer.data)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
