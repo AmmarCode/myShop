@@ -9,7 +9,6 @@ import {
   Button,
   Card,
   Form,
-  ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Loading from "../components/Loading";
@@ -122,7 +121,7 @@ const ProductScreen = ({ match, history }) => {
                   <div className="d-grid gap-2">
                     <Button                      
                       className="btn btn-primary"
-                      disabled={product.countInStock == 0}
+                      disabled={product.countInStock === 0}
                       type="button"
                       onClick={addToCartHandler}
                     >
