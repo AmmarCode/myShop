@@ -3,7 +3,7 @@ import { Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { NavLink } from "react-router-dom";
 
-const ChechoutSteps = ({ step1, step2, step3, step4 }) => {
+const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
 		<Nav className="justify-content-center mb-4">
 		
@@ -51,4 +51,4 @@ const ChechoutSteps = ({ step1, step2, step3, step4 }) => {
 	)
 };
 
-export default ChechoutSteps;
+export default CheckoutSteps;
