@@ -137,5 +137,20 @@ def addOrderItems(request):
             product.countInStock -= item.qty
             product.save()
 
-        serializer = OrderSerializer(order, many=False)    
+        serializer = OrderSerializer(order, many=False)
         return Response(serializer.data)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def getOrderById(request, pk):
+    user = request.user
+    try:
+        order = Order.objects.get(_id=pk)
+        if user.is_staff or order.user == user:
+            serializer = OrderSerializer(order, many=False)
+            return Response(serializer.data)
+        else:
+            return Response({'detial': 'Not authorised to view this order'}, status=status.HTTP_400_BAD_REQUEST)
+    except:
+        return Response({'detail': "Order does not exist"}, status=status.HTTP_400_BAD_REQUEST)
