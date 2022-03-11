@@ -15,7 +15,7 @@ urlpatterns = [
     path('products/<str:pk>/', views.getProduct, name='product'),
 
     path('orders/add/', views.addOrderItems, name='add_order'),
+	path('orders/userorders/', views.getUserOrders, name='user_orders'),
     path('orders/<str:pk>/', views.getOrderById, name='get_order_by_id'),
     path('orders/<str:pk>/pay/', views.updateOrderToPaid, name='update_order_to_paid'),
-
 ]
