@@ -10,6 +10,10 @@ import {
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
   ORDER_PAY_RESET,
+  ORDER_LIST_USER_REQUEST,
+  ORDER_LIST_USER_SUCCESS,
+  ORDER_LIST_USER_FAIL,
+  ORDER_LIST_USER_RESET,
 } from "../constants/orderConstants";
 import { CART_CLEAR_ITEMS } from "../constants/cartConstants";
 
@@ -121,3 +125,41 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
     });
   }
 };
+
+export const listUserOrders = () => async (dispatch, getState) => {
+  try {
+      dispatch({
+          type: ORDER_LIST_USER_REQUEST
+      })
+
+      const {
+          userLogin: { userInfo },
+      } = getState()
+
+      const config = {
+          headers: {
+              'Content-type': 'application/json',
+              Authorization: `Bearer ${userInfo.token}`
+          }
+      }
+
+      const { data } = await axios.get(
+          `/api/orders/userorders/`,
+          config
+      )
+
+      dispatch({
+          type: ORDER_LIST_USER_SUCCESS,
+          payload: data
+      })
+
+
+  } catch (error) {
+      dispatch({
+          type: ORDER_LIST_USER_FAIL,
+          payload: error.response && error.response.data.detail
+              ? error.response.data.detail
+              : error.message,
+      })
+  }
+}
