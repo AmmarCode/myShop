@@ -64,7 +64,7 @@ const CartScreen = ({ match, location, history }) => {
 
                   <Col md={2}>${item.price}</Col>
 
-                  <Col md={1}>
+                  <Col md={2}>
                     <Form.Control
                       as="select"
                       value={item.qty}
