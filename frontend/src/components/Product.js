@@ -15,7 +15,7 @@ const Product = ({ product }) => {
           to={`/product/${product._id}`}
           style={{ textDecorationLine: "none" }}
         >
-          <Card.Title style={{ color: "white" }}>
+          <Card.Title>
             <strong>{product.name}</strong>
           </Card.Title>
         </Link>
