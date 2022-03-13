@@ -15,7 +15,12 @@ urlpatterns = [
     path('users/delete/<str:pk>/', views.deleteUser, name='delete_user'),
 
     path('products/', views.getProducts, name='products'),
+    path('products/create/', views.createProduct, name="create_product"),
+    path('products/upload/', views.uploadImage, name="upload_image"),
     path('products/<str:pk>/', views.getProduct, name='product'),
+    path('products/update/<str:pk>', views.updateProduct, name='update_product'),
+    path('products/delete/<str:pk>/', views.deleteProduct, name='delete_product'),
+
 
     path('orders/add/', views.addOrderItems, name='add_order'),
 	path('orders/userorders/', views.getUserOrders, name='user_orders'),
