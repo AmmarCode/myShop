@@ -17,13 +17,17 @@ urlpatterns = [
     path('products/', views.getProducts, name='products'),
     path('products/create/', views.createProduct, name="create_product"),
     path('products/upload/', views.uploadImage, name="upload_image"),
+    path('products/<str:pk>/reviews/', views.createProductReview, name="create_review"),
+    path('products/top/', views.getTopProducts, name='top_products'),
     path('products/<str:pk>/', views.getProduct, name='product'),
     path('products/update/<str:pk>', views.updateProduct, name='update_product'),
     path('products/delete/<str:pk>/', views.deleteProduct, name='delete_product'),
 
 
+	path('orders/', views.getOrders, name='orders'),
     path('orders/add/', views.addOrderItems, name='add_order'),
 	path('orders/userorders/', views.getUserOrders, name='user_orders'),
+    path('orders/<str:pk>/delivered/', views.updateOrderToDelivered, name='update_order_to_delivered'),
     path('orders/<str:pk>/', views.getOrderById, name='get_order_by_id'),
     path('orders/<str:pk>/pay/', views.updateOrderToPaid, name='update_order_to_paid'),
 ]
