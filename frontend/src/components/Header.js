@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Navbar,
@@ -9,19 +9,32 @@ import {
   Button,
   NavDropdown,
 } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
-import { logout } from '../actions/userActions';
+import { logout } from "../actions/userActions";
 
 const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
+
+  const [keyword, setKeyword] = useState("");
+
+  let history = useHistory();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (keyword) {
+      history.push(`/?keyword=${keyword}&page=1`);
+    } else {
+      history.push(history.push(history.location.pathname));
+    }
+  };
 
   return (
     <header>
@@ -32,14 +45,22 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
-            <Form className="d-flex">
+            <Form className="d-flex" onSubmit={submitHandler}>
               <FormControl
-                type="search"
+                type="text"
+                name='q'
+                onChange={(e) => setKeyword(e.target.value)}                
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
               />
-              <Button variant="outline-success">Search</Button>
+              <Button 
+              type='submit'
+              variant='outline-success'
+              className='p-2'
+              >
+                Search
+              </Button>
             </Form>
             <Nav
               className="mr-auto my-2 my-lg-0"
@@ -53,13 +74,14 @@ const Header = () => {
               </LinkContainer>
 
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id='username'>
-                  <LinkContainer to='/profile'>
+                <NavDropdown title={userInfo.name} id="username">
+                  <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
 
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <LinkContainer to="/login">
@@ -70,24 +92,20 @@ const Header = () => {
               )}
 
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin Menu' id='admin'>
-                  <LinkContainer to='/admin/userlist'>
+                <NavDropdown title="Admin Menu" id="admin">
+                  <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
 
-                  <LinkContainer to='/admin/productlist'>
+                  <LinkContainer to="/admin/productlist">
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
 
-                  <LinkContainer to='/admin/orderlist'>
+                  <LinkContainer to="/admin/orderlist">
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
-
-
                 </NavDropdown>
               )}
-
-
             </Nav>
           </Navbar.Collapse>
         </Container>
