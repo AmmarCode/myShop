@@ -16,7 +16,7 @@ This is my capstone project for [CS50’s Web Programming with Python and JavaSc
 # Distinctiveness and Complexity
 
 - MyBoxingShop is an online retail store
-- MyBoxingShop have two UI one for the shop admin and one for the customers
+- MyBoxingShop have two UI one for the shop admin other than django admin UI and one for the customers
 - Customers are required to create a profile to complete the purchase of their favourite boxing gear
 - Customers are able to complete their payment using the integrated PayPal payment buttons
 - Customers are able to view their orders history and it's shipping status
