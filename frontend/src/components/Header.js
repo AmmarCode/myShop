@@ -53,6 +53,7 @@ const Header = () => {
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
+                autoComplete="off"
               />
               <Button 
               type='submit'
