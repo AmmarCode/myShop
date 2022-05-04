@@ -1,6 +1,8 @@
 # MyBoxingShop
 
-This is my capstone project for [CS50’s Web Programming with Python and JavaScript](https://cs50.harvard.edu/web/2020/projects/final/capstone/). 
+This is my capstone project for [CS50’s Web Programming with Python and JavaScript](https://cs50.harvard.edu/web/2020/projects/final/capstone/).
+
+[Project Demo](https://www.youtube.com/watch?v=0D3KPQ_MKq0)
 
 # Table of contents
 
